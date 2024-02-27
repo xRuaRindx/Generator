@@ -6,14 +6,6 @@ from tensorflow.keras.layers import LSTM, Dense
 from tensorflow.keras.models import Sequential
 from music21 import converter, instrument, note, chord, stream
 from pydub import AudioSegment
-from pydub.playback import play
-
-# Google Colab'da pydub kütüphanesini yükleme
-!pip install pydub
-
-from pydub.playback import play
-from pydub.utils import which
-from pydub.generators import Sine
 
 # MP3 dosyasını yükleyerek MIDI dosyasına dönüştürme
 def mp3_to_midi(mp3_file):
@@ -24,7 +16,7 @@ def mp3_to_midi(mp3_file):
     return "temp.mid"
 
 # MP3 dosyasının bulunduğu yol
-mp3_file = r'C:\Users\gkhnc\Desktop\List\your_mp3_file.mp3'
+mp3_file = 'path/to/your/mp3/file.mp3'
 
 # MP3 dosyasını MIDI dosyasına dönüştürme
 midi_file = mp3_to_midi(mp3_file)
@@ -118,8 +110,8 @@ for pattern in prediction_output:
     offset += 0.5
 
 midi_stream = stream.Stream(output_notes)
-midi_stream.write('midi', fp='/content/generated_music.mid')
+midi_stream.write('midi', fp='generated_music.mid')
 
 # Oluşturulan MIDI dosyasını .mp3 formatına dönüştürme
-sound = AudioSegment.from_file("/content/generated_music.mid", format="mid")
-sound.export("/content/generated_music.mp3", format="mp3")
+sound = AudioSegment.from_file("generated_music.mid", format="mid")
+sound.export("generated_music.mp3", format="mp3")
